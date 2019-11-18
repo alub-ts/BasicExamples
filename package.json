@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@portis/web3": "^2.0.0-beta.54",
     "@terminal-packages/sdk": "^1.0.37",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
