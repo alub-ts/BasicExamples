@@ -4,7 +4,7 @@ import "./App.css";
 import { TerminalHttpProvider } from "@terminal-packages/sdk";
 import Web3 from "web3";
 
-//window.web3 = new Web3(window.terminal.ethereum);
+window.web3 = new Web3(window.terminal.ethereum);
 //skale endpoint = http://sip1.skalenodes.com:10046 configure in metamask as rpc endpoint
 function App() {
   const test = () => {
