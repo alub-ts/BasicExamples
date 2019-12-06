@@ -1,40 +1,35 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { TerminalHttpProvider } from "@terminal-packages/sdk";
+import {
+  TerminalHttpProvider,
+  SourceType,
+  EnvironmentTypes
+} from "@terminal-packages/sdk";
 import Web3 from "web3";
 
-window.web3 = new Web3(window.terminal.ethereum);
-//skale endpoint = http://sip1.skalenodes.com:10046 configure in metamask as rpc endpoint
+const web3 = new Web3(window.terminal.ethereum);
+
 function App() {
+  const sendTx = () => {
+    web3.eth.getAccounts().then(accounts => {
+      console.log(accounts);
+      web3.eth
+        .sendTransaction({
+          from: accounts[0],
+          to: accounts[0],
+          value: web3.utils.toWei(".01", "ether")
+        })
+        .then(console.log);
+    });
+  };
   const test = () => {
-    window.web3.eth.getTransaction(
-      "0x46053709b461e47f58ab67e40a7309a5db3f5dfd9bdeba586467b4e95993b9ce",
-      (err, res) => {
-        console.log(err);
-        console.log(res);
-      }
-    );
-  };
-  const test2 = () => {
-    window.web3.eth.getBalance(
-      "0xaD7d7543188e13b63699eEF2f0B963d6d589B47D",
-      (err, res) => {
-        console.log(err);
-        console.log(res);
-      }
-    );
-    //window.web3.eth.getBalance('0xaD7d7543188e13b63699eEF2f0B963d6d589B47D').then(console.log)
-  };
-  const test3 = () => {
-    //can not use promises without terminal.window.etherum
-    window.web3.eth.getBlockNumber().then(console.log);
+    web3.eth.getBlockNumber().then(console.log);
   };
   return (
     <div className="App">
-      <button onClick={() => test()}>Test</button>
-      <button onClick={() => test2()}>Test2</button>
-      <button onClick={() => test3()}>BlockNumber</button>
+      <button onClick={() => sendTx()}>Send Tx</button>
+      <button onClick={() => test()}>BlockNumber</button>
     </div>
   );
 }
